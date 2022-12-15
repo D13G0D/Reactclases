@@ -37,7 +37,7 @@ const usuario2 = {
 const HomePage = () => {
   const navigate = useNavigate();
   const handleOnClick = useCallback(() => navigate("/Auto", {}, [navigate]));
-  //en este momento state vale lo mismo que usuario 1
+  //en este momento user (deberia ser state pero solo es el nombre) vale lo mismo que usuario 1
   //genera una funcion setteadora que me va a permitir cambiar los datos se usuario 1 sin afectarlo directamente(setState)
   const [user, setUser] = useState(usuario1);
   const [usuarioEditado, setUsuarioEditado] = useState(null);
@@ -50,23 +50,23 @@ const HomePage = () => {
   }
 
   const userAdd = (usuario)=>{
-    const addUsuario =[
-      ...user, usuario
+    const addUsuario =[  
+      ...user, usuario //Tenemos la caja con usuarios (user) y lo mantenemos y agregamos un nuevo usuario
     ]
-    setUser(addUsuario);
+    setUser(addUsuario); //setUser ahora tiene todos los usuarios anteriores y el nuevo usuario
   }
 
   const userEdit =(usuarioEditado)=>{
-    const editUser = user.map(usuario => (usuario.rut === usuarioEditado.rut ? usuarioEditado : usuario))
-    setUser(editUser);
+    const editUser = user.map(usuario => (usuario.rut === usuarioEditado.rut ? usuarioEditado : usuario)) //filtramos por rut y hacemos una pregunta creando 2 escenarios 
+    setUser(editUser); // asi podemos tener botones y acciones mas dinamicas
   }
 
   return (
     <div class="container mt-3">
       <div class="row">
-        <div class="col">
-          <FormularioUsuario userAdd={userAdd} usuarioEditado={usuarioEditado} setUsuarioEditado={setUsuarioEditado} userEdit={userEdit}/>
-        </div>
+        <div class="col"> {/* agregamos todas las funciones creadas donde las usaremos para luego llamarlas en el componente recuerda el nombre que se le da aqui es el mismo que */}
+          <FormularioUsuario userAdd={userAdd} usuarioEditado={usuarioEditado} setUsuarioEditado={setUsuarioEditado} userEdit={userEdit}/> {/* el que pides en el componente */} 
+        </div>                        {/* primerNombreParaExportarFuncion = {Nombre de nuestra funcion creada}  */}
       </div>
       <BotonFormulario infoBoton={"Ir a autos"} handleOnClick={handleOnClick} />
       <hr />
